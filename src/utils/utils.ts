@@ -62,3 +62,28 @@ export const validatePasswordLength = value => {
 
   return oneSymbolOrDigitRegExp.test(value);
 };
+
+export const hasOneSymbolOrDigit = value => {
+  const oneSymbolOrDigitRegExp =
+    /^((?=.*(\d|[ <>[\](){}/|`~@#$%^&*_\-+=:;',.!?,]))[А-Яа-яA-Za-z\d <>[\](){}/|`~@#$%^&*_\-+=:;',.!?,]*)$/;
+
+  return oneSymbolOrDigitRegExp.test(value);
+};
+
+export const upperCaseAndLowerCase = value => {
+  const upperCaseAndLowerCase = /^((?=.*[a-z])(?=.*[A-Z])[А-Яа-яA-Za-z\d <>[\](){}/|`~@#$%^&*_\-+=:;',.!?,]*)$/;
+
+  return upperCaseAndLowerCase.test(value);
+};
+
+export const isPhone = value => {
+  const phoneRegExp = /^((\+[0-9]|[0-9]|)\s?(\(|)([0-9]){3}(\)|)\s?([0-9]){3}(-|)([0-9]){2}(-|)([0-9]){2})$/;
+
+  return phoneRegExp.test(value);
+};
+
+export const hasAnyExceptRussianAndSpaces = (value: string) => {
+  const anyExceptRussianAndSpaces = /^((?=.*[A-Za-z])[A-Za-z\d <>[\](){}/|`~@#$%^&*_\-+=:;',.!?,]*)$/;
+
+  return anyExceptRussianAndSpaces.test(value);
+};

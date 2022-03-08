@@ -1,6 +1,6 @@
 import { action, computed, isArrayLike, isObservable, observable, runInAction } from 'mobx';
-import { ICompossibleValidatable, IValidator, ValidateResult } from '../types/types';
-import { applyValidators } from '../utils/utils';
+import { ICompossibleValidatable, IValidator, ValidateResult } from 'types';
+import { applyValidators } from 'utils';
 
 export type ValidatableMapOrArray = { [key: string]: ICompossibleValidatable<any, any> };
 
@@ -9,7 +9,8 @@ export type UnsafeValue<TValue extends ValidatableMapOrArray> = { [T in keyof TV
 export type SafeValue<TValue extends ValidatableMapOrArray> = { [T in keyof TValue]: TValue[T]['$'] };
 
 export class Form<TValue extends ValidatableMapOrArray>
-  implements ICompossibleValidatable<TValue, UnsafeValue<TValue>> {
+  implements ICompossibleValidatable<TValue, UnsafeValue<TValue>>
+{
   @observable public validating = false;
   @observable public autoValidationEnabled = false;
   protected mode: 'object' | 'array' = 'object';

@@ -1,4 +1,4 @@
-import { VField, Form } from '../Form';
+import { Field, Form } from 'Form';
 import { toJS } from 'mobx';
 
 export const required = (message = 'Заполните поле') => {
@@ -11,22 +11,22 @@ export const checkStringLength = (message: string, length = 1) => {
 
 describe('test new validation form', () => {
   let form: Form<{
-    stringField: VField<Optional<string>>;
-    arrayField: VField<Optional<string[]>>;
-    mulitplyValidatorsField: VField<Optional<string>>;
+    stringField: Field<Optional<string>>;
+    arrayField: Field<Optional<string[]>>;
+    mulitplyValidatorsField: Field<Optional<string>>;
   }>;
-  let stringField: VField<Optional<string>>;
-  let arrayField: VField<Optional<string[]>>;
-  let mulitplyValidatorsField: VField<Optional<string>>;
+  let stringField: Field<Optional<string>>;
+  let arrayField: Field<Optional<string[]>>;
+  let mulitplyValidatorsField: Field<Optional<string>>;
 
   const firstErrorMessage = 'Validation message 1';
   const secondErrorMessage = 'Validation message 2';
   const thirdErrorMessage = 'Validation message 3';
 
   beforeEach(() => {
-    stringField = new VField<Optional<string>>(null).validators(required(firstErrorMessage));
-    arrayField = new VField<Optional<string[]>>(null).validators(required(secondErrorMessage));
-    mulitplyValidatorsField = new VField<Optional<string>>(null).validators(
+    stringField = new Field<Optional<string>>(null).validators(required(firstErrorMessage));
+    arrayField = new Field<Optional<string[]>>(null).validators(required(secondErrorMessage));
+    mulitplyValidatorsField = new Field<Optional<string>>(null).validators(
       required(firstErrorMessage),
       checkStringLength(secondErrorMessage, 2),
       checkStringLength(thirdErrorMessage, 4)
@@ -114,7 +114,7 @@ describe('test new validation form', () => {
   });
 
   it('Проверка множества валидаторов вложенных', async () => {
-    const formWithNestedForm = new Form({ form: new Form({ name: new VField('123123') }) });
+    const formWithNestedForm = new Form({ form: new Form({ name: new Field('123123') }) });
 
     expect(formWithNestedForm.values).toEqual({ form: { name: '123123' } });
   });
